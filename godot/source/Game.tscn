@@ -10,7 +10,7 @@
 [ext_resource path="res://source/mechanics/upgrades/PlayerControl.gd" type="Script" id=8]
 [ext_resource path="res://source/mechanics/upgrades/AIBrain.gd" type="Script" id=9]
 [ext_resource path="res://source/mechanics/upgrades/Colors.gd" type="Script" id=10]
-[ext_resource path="res://source/mechanics/upgrades/Scoring.gd" type="Script" id=11]
+[ext_resource path="res://source/mechanics/upgrades/Scoreboard.gd" type="Script" id=11]
 [ext_resource path="res://source/mechanics/BallRespawner.gd" type="Script" id=12]
 [ext_resource path="res://source/mechanics/SpeedIncrease.gd" type="Script" id=13]
 [ext_resource path="res://source/mechanics/Scoring.gd" type="Script" id=14]
@@ -78,7 +78,7 @@ unlock_at = 4
 script = ExtResource( 10 )
 unlock_at = 5
 
-[node name="Scoring" type="Node2D" parent="Mechanics/Unlocker"]
+[node name="Scoreboard" type="Node2D" parent="Mechanics/Unlocker"]
 script = ExtResource( 11 )
 unlock_at = 6
 
@@ -93,7 +93,7 @@ max_multiplier = 2.0
 
 [node name="Scoring" type="Node2D" parent="Mechanics"]
 script = ExtResource( 14 )
-max_goals = 2
+max_goals = 1
 
 [node name="World" type="Node2D" parent="."]
 
@@ -127,8 +127,8 @@ visible = false
 [node name="PauseScreen" parent="UI" instance=ExtResource( 19 )]
 visible = false
 
+[connection signal="goal_maxed" from="Mechanics/Scoring" to="Mechanics/Unlocker" method="unlock_next_upgrade"]
 [connection signal="detected_ball" from="World/GoalTop" to="." method="_on_GoalTop_detected_ball"]
-[connection signal="detected_ball" from="World/GoalTop" to="Mechanics/Unlocker" method="_on_GoalTop_detected_ball"]
 [connection signal="detected_this_ball" from="World/GoalTop" to="Mechanics/BallRespawner" method="respawn_ball"]
 [connection signal="detected_ball" from="World/GoalBottom" to="." method="_on_GoalBottom_detected_ball"]
 [connection signal="detected_this_ball" from="World/GoalBottom" to="Mechanics/BallRespawner" method="respawn_ball"]

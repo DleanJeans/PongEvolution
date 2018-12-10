@@ -21,7 +21,7 @@ func set_update_unlock_at(value):
 		
 		last_child = child 
 
-func _on_GoalTop_detected_ball():
+func unlock_next_upgrade():
 	_unlock()
 	while goal_count < save_goal_count:
 		_unlock()

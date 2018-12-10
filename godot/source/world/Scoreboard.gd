@@ -2,6 +2,9 @@ class_name Scoreboard
 extends Node2D
 
 export(float) var tween_duration = 0.5
+
+onready var progress = $Progress
+
 var player_color setget set_player_color
 var ai_color setget set_ai_color
 
@@ -10,6 +13,10 @@ func set_player_color(value):
 
 func set_ai_color(value):
 	$Progress.tint_under = value
+
+func update_max_goals(value):
+	$Progress.min_value = -value
+	$Progress.max_value = value
 
 func increase():
 	_tween_to($Progress.value + 1)
