@@ -1,10 +1,10 @@
 extends Node
 
-var Gun = preload('res://source/world/Gun.tscn')
-var Gunner = preload('res://source/world/Gunner.tscn')
-var Bullet = preload('res://source/world/Bullet.tscn')
-var Spike = load('res://source/world/Spike.tscn')
-var Brain = preload('res://source/ai/Brain.tscn')
+var Paddle = preload('res://source/world/Paddle.tscn')
+var Wall = load('res://source/world/Wall.tscn')
+var Brain = load('res://source/ai/Brain.tscn')
 
-var TeamCircle = preload('res://source/world/TeamCircle.tscn')
-var DebugLabel = preload('res://source/debug/DebugLabel.tscn')
+var ColorPicker = load('res://source/ai/ColorPicker.tscn')
+var Scoreboard = load('res://source/world/Scoreboard.tscn')
+
+var PopAnimation = preload('res://source/feel/PopAnimation.tscn')

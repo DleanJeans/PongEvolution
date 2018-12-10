@@ -1,0 +1,20 @@
+extends AnimationPlayer
+
+var delayed = false
+
+func _ready():
+	get_parent().scale = Vector2()
+	if not delayed:
+		play('Pop')
+
+func pop(parent):
+	parent.call_deferred('add_child', self)
+	return self
+
+func delay(seconds = 1):
+	$Timer.start(seconds)
+	delayed = true
+	return self
+
+func _on_Timer_timeout():
+	play('Pop')

@@ -1,0 +1,51 @@
+[gd_scene load_steps=6 format=2]
+
+[ext_resource path="res://source/world/Ball.gd" type="Script" id=1]
+[ext_resource path="res://assets/png/Circle.png" type="Texture" id=2]
+[ext_resource path="res://source/world/Movement.gd" type="Script" id=3]
+[ext_resource path="res://source/world/ball/Bouncing.gd" type="Script" id=4]
+
+[sub_resource type="CircleShape2D" id=1]
+
+custom_solver_bias = 0.0
+radius = 15.0
+
+[node name="Ball" type="KinematicBody2D"]
+input_pickable = false
+collision_layer = 1
+collision_mask = 1
+collision/safe_margin = 0.08
+motion/sync_to_physics = false
+script = ExtResource( 1 )
+normal_speed = 500
+
+[node name="Sprite" type="Sprite" parent="."]
+scale = Vector2( 0.3, 0.3 )
+texture = ExtResource( 2 )
+
+[node name="Shape" type="CollisionShape2D" parent="."]
+shape = SubResource( 1 )
+
+[node name="Movement" type="Node2D" parent="."]
+script = ExtResource( 3 )
+
+[node name="Bouncing" type="Node2D" parent="."]
+script = ExtResource( 4 )
+max_angle = 45
+
+[node name="Area" type="Area2D" parent="Bouncing"]
+scale = Vector2( 1.1, 1.1 )
+input_pickable = true
+gravity_vec = Vector2( 0, 1 )
+gravity = 98.0
+linear_damp = 0.1
+angular_damp = 1.0
+collision_layer = 0
+collision_mask = 6
+audio_bus_override = false
+audio_bus_name = "Master"
+
+[node name="Shape" type="CollisionShape2D" parent="Bouncing/Area"]
+shape = SubResource( 1 )
+
+[connection signal="body_entered" from="Bouncing/Area" to="Bouncing" method="_on_Area_body_entered"]

@@ -1,3 +1,4 @@
+class_name PlayerControl
 extends Node2D
 
 export(bool) var enabled = true setget set_enabled
@@ -10,11 +11,9 @@ func _physics_process(delta):
 	_process_movement()
 
 func _process_movement():
-	if Input.is_action_just_pressed('left'):
-		pass
-	if Input.is_action_just_pressed('right'):
-		pass
-	if Input.is_action_just_pressed('up'):
-		pass
-	if Input.is_action_just_pressed('down'):
-		pass
+	var player = GameData.player
+	
+	if Input.is_action_pressed('left'):
+		player.move_left()
+	if Input.is_action_pressed('right'):
+		player.move_right()
