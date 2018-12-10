@@ -8,8 +8,6 @@ func unlock():
 	GameData.left_wall = left_wall
 	Scenes.PopAnimation.instance().pop(left_wall)
 	
-#	yield(get_tree().create_timer(0.25), 'timeout')
-	
 	var right_wall = Scenes.Wall.instance()
 	right_wall.name = 'RightWall'
 	right_wall.position = $RightWallPosition.position

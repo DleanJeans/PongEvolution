@@ -1,13 +1,24 @@
 extends 'res://source/mechanics/upgrades/Upgrade.gd'
 
 func unlock():
-	GameData.coloring.add_player_color(GameData.scoring.board, 'player_color')
-	GameData.coloring.add_ai_color(GameData.scoring.board, 'ai_color')
-	GameData.coloring.update_modulate()
+	var scoring = GameData.scoring
 	
-	GameData.scoring.connect('max_goals_changed', GameData.scoring.board, 'update_max_goals')
+	scoring.connect('max_goals_changed', scoring.board, 'update_max_goals')
 	
-	GameData.scoring.max_goals = 2
+	scoring.max_goals = 2
 	
-	GameData.left_wall.sync_with(GameData.scoring.board.progress)
-	GameData.right_wall.sync_with(GameData.scoring.board.progress)
+	var coloring = GameData.coloring
+	
+	coloring.add_player_color(GameData.scoring.board, 'player_color')
+	coloring.add_ai_color(GameData.scoring.board, 'ai_color')
+	
+	coloring.add_player_color(GameData.left_wall, 'bottom_color')
+	coloring.add_player_color(GameData.right_wall, 'bottom_color')
+	coloring.add_ai_color(GameData.left_wall, 'top_color')
+	coloring.add_ai_color(GameData.right_wall, 'top_color')
+	
+	coloring.update_modulate()
+	
+	yield($'../../BallRespawner', 'ball_respawned')
+	GameData.left_wall.sync_with(scoring.board.progress)
+	GameData.right_wall.sync_with(scoring.board.progress)

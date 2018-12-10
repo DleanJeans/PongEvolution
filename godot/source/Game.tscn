@@ -1,4 +1,4 @@
-[gd_scene load_steps=20 format=2]
+[gd_scene load_steps=21 format=2]
 
 [ext_resource path="res://source/Game.gd" type="Script" id=1]
 [ext_resource path="res://source/debug/Debug.gd" type="Script" id=2]
@@ -10,15 +10,16 @@
 [ext_resource path="res://source/mechanics/upgrades/PlayerControl.gd" type="Script" id=8]
 [ext_resource path="res://source/mechanics/upgrades/AIBrain.gd" type="Script" id=9]
 [ext_resource path="res://source/mechanics/upgrades/Colors.gd" type="Script" id=10]
-[ext_resource path="res://source/mechanics/upgrades/Scoreboard.gd" type="Script" id=11]
-[ext_resource path="res://source/mechanics/BallRespawner.gd" type="Script" id=12]
-[ext_resource path="res://source/mechanics/SpeedIncrease.gd" type="Script" id=13]
-[ext_resource path="res://source/mechanics/Scoring.gd" type="Script" id=14]
-[ext_resource path="res://assets/Square.png" type="Texture" id=15]
-[ext_resource path="res://source/world/Ball.tscn" type="PackedScene" id=16]
-[ext_resource path="res://source/world/Goal.tscn" type="PackedScene" id=17]
-[ext_resource path="res://source/ui/GameOverScreen.tscn" type="PackedScene" id=18]
-[ext_resource path="res://source/ui/PauseScreen.tscn" type="PackedScene" id=19]
+[ext_resource path="res://source/mechanics/upgrades/LevelProgress.gd" type="Script" id=11]
+[ext_resource path="res://source/mechanics/upgrades/Scoreboard.gd" type="Script" id=12]
+[ext_resource path="res://source/mechanics/BallRespawner.gd" type="Script" id=13]
+[ext_resource path="res://source/mechanics/SpeedIncrease.gd" type="Script" id=14]
+[ext_resource path="res://source/mechanics/Scoring.gd" type="Script" id=15]
+[ext_resource path="res://assets/Square.png" type="Texture" id=16]
+[ext_resource path="res://source/world/Ball.tscn" type="PackedScene" id=17]
+[ext_resource path="res://source/world/Goal.tscn" type="PackedScene" id=18]
+[ext_resource path="res://source/ui/GameOverScreen.tscn" type="PackedScene" id=19]
+[ext_resource path="res://source/ui/PauseScreen.tscn" type="PackedScene" id=20]
 
 [node name="Game" type="Node2D"]
 script = ExtResource( 1 )
@@ -36,13 +37,13 @@ slomo_time_scale = 0.25
 
 [node name="Unlocker" type="Node2D" parent="Mechanics"]
 script = ExtResource( 4 )
-save_goal_count = 5
-update_unlock_at = null
+save_level = 5
+update_unlock_level = null
 
 [node name="PlayerPaddle" type="Node2D" parent="Mechanics/Unlocker"]
 editor/display_folded = true
 script = ExtResource( 5 )
-unlock_at = 1
+unlock_level = 1
 
 [node name="PlayerPosition" type="Position2D" parent="Mechanics/Unlocker/PlayerPaddle"]
 position = Vector2( 800, 800 )
@@ -50,7 +51,7 @@ position = Vector2( 800, 800 )
 [node name="Walls" type="Node2D" parent="Mechanics/Unlocker"]
 editor/display_folded = true
 script = ExtResource( 6 )
-unlock_at = 2
+unlock_level = 2
 
 [node name="LeftWallPosition" type="Position2D" parent="Mechanics/Unlocker/Walls"]
 position = Vector2( 450, 450 )
@@ -61,38 +62,42 @@ position = Vector2( 1150, 450 )
 [node name="AIPaddle" type="Node2D" parent="Mechanics/Unlocker"]
 editor/display_folded = true
 script = ExtResource( 7 )
-unlock_at = 3
+unlock_level = 3
 
 [node name="AIPosition" type="Position2D" parent="Mechanics/Unlocker/AIPaddle"]
 position = Vector2( 800, 100 )
 
 [node name="PlayerControl" type="Node2D" parent="Mechanics/Unlocker"]
 script = ExtResource( 8 )
-unlock_at = 3
+unlock_level = 3
 
 [node name="AIBrain" type="Node2D" parent="Mechanics/Unlocker"]
 script = ExtResource( 9 )
-unlock_at = 4
+unlock_level = 4
 
 [node name="Colors" type="Node2D" parent="Mechanics/Unlocker"]
 script = ExtResource( 10 )
-unlock_at = 5
+unlock_level = 5
+
+[node name="LevelProgress" type="Node2D" parent="Mechanics/Unlocker"]
+script = ExtResource( 11 )
+unlock_level = 5
 
 [node name="Scoreboard" type="Node2D" parent="Mechanics/Unlocker"]
-script = ExtResource( 11 )
-unlock_at = 6
+script = ExtResource( 12 )
+unlock_level = 6
 
 [node name="BallRespawner" type="Position2D" parent="Mechanics"]
 position = Vector2( 800, 450 )
-script = ExtResource( 12 )
+script = ExtResource( 13 )
 
 [node name="SpeedIncrease" type="Node2D" parent="Mechanics"]
-script = ExtResource( 13 )
+script = ExtResource( 14 )
 percent_per_paddle_hit = 2.0
 max_multiplier = 2.0
 
 [node name="Scoring" type="Node2D" parent="Mechanics"]
-script = ExtResource( 14 )
+script = ExtResource( 15 )
 max_goals = 1
 
 [node name="World" type="Node2D" parent="."]
@@ -101,15 +106,15 @@ max_goals = 1
 modulate = Color( 0, 0, 0, 1 )
 position = Vector2( 800, 450 )
 scale = Vector2( 16, 9 )
-texture = ExtResource( 15 )
+texture = ExtResource( 16 )
 
-[node name="Ball" parent="World" instance=ExtResource( 16 )]
+[node name="Ball" parent="World" instance=ExtResource( 17 )]
 position = Vector2( 800, 450 )
 
-[node name="GoalTop" parent="World" instance=ExtResource( 17 )]
+[node name="GoalTop" parent="World" instance=ExtResource( 18 )]
 position = Vector2( 800, -80 )
 
-[node name="GoalBottom" parent="World" instance=ExtResource( 17 )]
+[node name="GoalBottom" parent="World" instance=ExtResource( 18 )]
 position = Vector2( 800, 980 )
 
 [node name="Feel" type="Node2D" parent="."]
@@ -121,10 +126,10 @@ rotation = 0.0
 scale = Vector2( 1, 1 )
 transform = Transform2D( 1, 0, 0, 1, 0, 0 )
 
-[node name="GameOverScreen" parent="UI" instance=ExtResource( 18 )]
+[node name="GameOverScreen" parent="UI" instance=ExtResource( 19 )]
 visible = false
 
-[node name="PauseScreen" parent="UI" instance=ExtResource( 19 )]
+[node name="PauseScreen" parent="UI" instance=ExtResource( 20 )]
 visible = false
 
 [connection signal="goal_maxed" from="Mechanics/Scoring" to="Mechanics/Unlocker" method="unlock_next_upgrade"]

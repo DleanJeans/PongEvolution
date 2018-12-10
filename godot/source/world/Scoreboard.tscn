@@ -5,6 +5,7 @@
 [ext_resource path="res://source/world/ScoreboardColor.gd" type="Script" id=3]
 
 [node name="Scoreboard" type="Node2D"]
+visible = false
 script = ExtResource( 1 )
 tween_duration = 0.5
 

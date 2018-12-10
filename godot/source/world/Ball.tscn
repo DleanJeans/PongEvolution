@@ -31,7 +31,6 @@ script = ExtResource( 3 )
 
 [node name="Bouncing" type="Node2D" parent="."]
 script = ExtResource( 4 )
-max_angle = 45
 
 [node name="Area" type="Area2D" parent="Bouncing"]
 scale = Vector2( 1.1, 1.1 )

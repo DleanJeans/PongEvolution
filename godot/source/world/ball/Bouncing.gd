@@ -1,7 +1,5 @@
 extends Node2D
 
-export(float) var max_angle = 45
-
 onready var ball = get_parent()
 
 func _on_Area_body_entered(body):

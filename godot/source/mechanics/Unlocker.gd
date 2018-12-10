@@ -1,37 +1,45 @@
 tool
 extends Node2D
 
-export(int) var save_goal_count = 0
-export(bool) var update_unlock_at setget set_update_unlock_at
+signal new_level
 
-var goal_count = 0
+export(int) var save_level = 0
+export(bool) var update_unlock_level setget set_update_unlock_level
+
+var max_level = 0
+var level = 0
 var unlocks = 0
 
-func set_update_unlock_at(value):
+func set_update_unlock_level(value):
 	if not Engine.editor_hint: return
 	
 	var last_child
 	var num = 0
 	for child in get_children():
 		num += 1
-		if last_child and abs(child.unlock_at - last_child.unlock_at) >= 2:
-			child.unlock_at = last_child.unlock_at + 1
-		elif child.unlock_at == -1:
-			child.unlock_at = num
+		if last_child and abs(child.unlock_level - last_child.unlock_level) >= 2:
+			child.unlock_level = last_child.unlock_level + 1
+		elif child.unlock_level == -1:
+			child.unlock_level = num
 		
-		last_child = child 
+		last_child = child
+
+func _ready():
+	max_level = get_children().back().unlock_level
 
 func unlock_next_upgrade():
 	_unlock()
-	while goal_count < save_goal_count:
+	while level < save_level:
 		_unlock()
 
 func _unlock():
-	goal_count += 1
+	level += 1
 	
 	while get_child_count() > unlocks:
 		var child = get_child(unlocks)
-		if child.unlock_at == goal_count:
+		if child.unlock_level == level:
 			child.unlock()
 			unlocks += 1
 		else: break
+	
+	emit_signal('new_level', level)
