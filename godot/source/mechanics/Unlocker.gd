@@ -33,12 +33,13 @@ func unlock_next_upgrade():
 		_unlock()
 
 func _unlock():
-	level += 1
+	if level < max_level:
+		level += 1
 	
 	while get_child_count() > unlocks:
 		var child = get_child(unlocks)
 		if child.unlock_level == level:
-			child.unlock()
+			child.call_deferred('unlock')
 			unlocks += 1
 		else: break
 	

@@ -7,4 +7,5 @@ func unlock():
 	GameData.ui.add_child(level_progress)
 	
 	level_progress.set_max_level(unlocker.max_level)
+	level_progress.update_level(unlocker.level)
 	unlocker.connect('new_level', level_progress, 'update_level')

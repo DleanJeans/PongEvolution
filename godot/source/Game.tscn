@@ -1,4 +1,4 @@
-[gd_scene load_steps=21 format=2]
+[gd_scene load_steps=23 format=2]
 
 [ext_resource path="res://source/Game.gd" type="Script" id=1]
 [ext_resource path="res://source/debug/Debug.gd" type="Script" id=2]
@@ -12,33 +12,35 @@
 [ext_resource path="res://source/mechanics/upgrades/Colors.gd" type="Script" id=10]
 [ext_resource path="res://source/mechanics/upgrades/LevelProgress.gd" type="Script" id=11]
 [ext_resource path="res://source/mechanics/upgrades/Scoreboard.gd" type="Script" id=12]
-[ext_resource path="res://source/mechanics/BallRespawner.gd" type="Script" id=13]
-[ext_resource path="res://source/mechanics/SpeedIncrease.gd" type="Script" id=14]
-[ext_resource path="res://source/mechanics/Scoring.gd" type="Script" id=15]
-[ext_resource path="res://assets/Square.png" type="Texture" id=16]
-[ext_resource path="res://source/world/Ball.tscn" type="PackedScene" id=17]
-[ext_resource path="res://source/world/Goal.tscn" type="PackedScene" id=18]
-[ext_resource path="res://source/ui/GameOverScreen.tscn" type="PackedScene" id=19]
-[ext_resource path="res://source/ui/PauseScreen.tscn" type="PackedScene" id=20]
+[ext_resource path="res://source/mechanics/upgrades/MultiBall.gd" type="Script" id=13]
+[ext_resource path="res://source/mechanics/BallRespawner.gd" type="Script" id=14]
+[ext_resource path="res://source/mechanics/SpeedIncrease.gd" type="Script" id=15]
+[ext_resource path="res://source/mechanics/Scoring.gd" type="Script" id=16]
+[ext_resource path="res://assets/Square.png" type="Texture" id=17]
+[ext_resource path="res://source/world/Ball.tscn" type="PackedScene" id=18]
+[ext_resource path="res://source/world/Goal.tscn" type="PackedScene" id=19]
+[ext_resource path="res://source/ui/GameOverScreen.tscn" type="PackedScene" id=20]
+[ext_resource path="res://source/ui/PauseScreen.tscn" type="PackedScene" id=21]
+
+[sub_resource type="CircleShape2D" id=1]
+
+radius = 20.0
 
 [node name="Game" type="Node2D"]
 script = ExtResource( 1 )
 
 [node name="Debug" type="Node2D" parent="."]
 script = ExtResource( 2 )
-enable = true
 
 [node name="TimeControl" type="Node2D" parent="Debug"]
 pause_mode = 2
 script = ExtResource( 3 )
-slomo_time_scale = 0.25
 
 [node name="Mechanics" type="Node2D" parent="."]
 
 [node name="Unlocker" type="Node2D" parent="Mechanics"]
 script = ExtResource( 4 )
-save_level = 5
-update_unlock_level = null
+save_level = 7
 
 [node name="PlayerPaddle" type="Node2D" parent="Mechanics/Unlocker"]
 editor/display_folded = true
@@ -87,18 +89,26 @@ unlock_level = 5
 script = ExtResource( 12 )
 unlock_level = 6
 
+[node name="MultiBall" type="Node2D" parent="Mechanics/Unlocker"]
+script = ExtResource( 13 )
+unlock_level = 7
+
 [node name="BallRespawner" type="Position2D" parent="Mechanics"]
 position = Vector2( 800, 450 )
-script = ExtResource( 13 )
+script = ExtResource( 14 )
+
+[node name="Area" type="Area2D" parent="Mechanics/BallRespawner"]
+collision_layer = 0
+
+[node name="Shape" type="CollisionShape2D" parent="Mechanics/BallRespawner/Area"]
+shape = SubResource( 1 )
 
 [node name="SpeedIncrease" type="Node2D" parent="Mechanics"]
-script = ExtResource( 14 )
-percent_per_paddle_hit = 2.0
+script = ExtResource( 15 )
 max_multiplier = 2.0
 
 [node name="Scoring" type="Node2D" parent="Mechanics"]
-script = ExtResource( 15 )
-max_goals = 1
+script = ExtResource( 16 )
 
 [node name="World" type="Node2D" parent="."]
 
@@ -106,30 +116,25 @@ max_goals = 1
 modulate = Color( 0, 0, 0, 1 )
 position = Vector2( 800, 450 )
 scale = Vector2( 16, 9 )
-texture = ExtResource( 16 )
+texture = ExtResource( 17 )
 
-[node name="Ball" parent="World" instance=ExtResource( 17 )]
+[node name="Ball" parent="World" instance=ExtResource( 18 )]
 position = Vector2( 800, 450 )
 
-[node name="GoalTop" parent="World" instance=ExtResource( 18 )]
+[node name="GoalTop" parent="World" instance=ExtResource( 19 )]
 position = Vector2( 800, -80 )
 
-[node name="GoalBottom" parent="World" instance=ExtResource( 18 )]
+[node name="GoalBottom" parent="World" instance=ExtResource( 19 )]
 position = Vector2( 800, 980 )
 
 [node name="Feel" type="Node2D" parent="."]
 
 [node name="UI" type="CanvasLayer" parent="."]
-layer = 1
-offset = Vector2( 0, 0 )
-rotation = 0.0
-scale = Vector2( 1, 1 )
-transform = Transform2D( 1, 0, 0, 1, 0, 0 )
 
-[node name="GameOverScreen" parent="UI" instance=ExtResource( 19 )]
+[node name="GameOverScreen" parent="UI" instance=ExtResource( 20 )]
 visible = false
 
-[node name="PauseScreen" parent="UI" instance=ExtResource( 20 )]
+[node name="PauseScreen" parent="UI" instance=ExtResource( 21 )]
 visible = false
 
 [connection signal="goal_maxed" from="Mechanics/Scoring" to="Mechanics/Unlocker" method="unlock_next_upgrade"]

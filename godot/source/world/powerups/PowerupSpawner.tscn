@@ -1,0 +1,22 @@
+[gd_scene load_steps=3 format=2]
+
+[ext_resource path="res://source/world/powerups/PowerupSpawner.gd" type="Script" id=1]
+
+[sub_resource type="RectangleShape2D" id=1]
+
+extents = Vector2( 250, 200 )
+
+[node name="PowerupSpawner" type="Node2D"]
+position = Vector2( 800, 450 )
+script = ExtResource( 1 )
+
+[node name="Area" type="Area2D" parent="."]
+
+[node name="Shape" type="CollisionShape2D" parent="Area"]
+shape = SubResource( 1 )
+
+[node name="Timer" type="Timer" parent="."]
+wait_time = 5.0
+autostart = true
+
+[connection signal="timeout" from="Timer" to="." method="_on_Timer_timeout"]

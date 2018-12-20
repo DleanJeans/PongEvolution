@@ -9,18 +9,13 @@
 
 [sub_resource type="RectangleShape2D" id=1]
 
-custom_solver_bias = 0.0
 extents = Vector2( 70, 15 )
 
 [node name="Paddle" type="KinematicBody2D"]
 scale = Vector2( 1e-005, 1e-005 )
-input_pickable = false
 collision_layer = 2
 collision_mask = 5
-collision/safe_margin = 0.08
-motion/sync_to_physics = false
 script = ExtResource( 1 )
-speed_multiplier = 1
 
 [node name="Shape" type="CollisionShape2D" parent="."]
 shape = SubResource( 1 )
@@ -35,17 +30,11 @@ texture = ExtResource( 2 )
 script = ExtResource( 4 )
 max_speed = 700.0
 acceleration = 7000.0
-opposite_multiplier = 3
-damping = 0.1
 
 [node name="Movement" type="Node2D" parent="."]
 script = ExtResource( 5 )
 
 [node name="Recoil" type="Node2D" parent="."]
 script = ExtResource( 6 )
-duration = 0.4
-max_recoil = 100
-max_recoil_speed = 100
-damping = 0.1
 
 [connection signal="hit_this_ball" from="." to="Recoil" method="_on_Paddle_hit_this_ball"]
