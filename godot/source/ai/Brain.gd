@@ -14,7 +14,6 @@ func think():
 	for b in balls:
 		var to_ball = b.position - paddle.position
 		if b.velocity.y > 0 or to_ball.y < 0:
-#			balls.erase(b)
 			continue
 		if b.velocity.y == 0:
 			continue
@@ -22,8 +21,7 @@ func think():
 		if time_to_paddle > 0 and time_to_paddle < shortest_time:
 			shortest_time = time_to_paddle
 			ball = b
-		
-#	ball = GameData.ball
+	
 	var to_ball = ball.position - paddle.position
 	
 	if ball.velocity.y > 0 or to_ball.y < 0:

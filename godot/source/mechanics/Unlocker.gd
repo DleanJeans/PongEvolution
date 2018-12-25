@@ -1,7 +1,8 @@
 tool
+class_name Unlocker
 extends Node2D
 
-signal new_level
+signal new_level(level)
 
 export(int) var save_level = 0
 export(bool) var update_unlock_level setget set_update_unlock_level
@@ -26,6 +27,7 @@ func set_update_unlock_level(value):
 
 func _ready():
 	max_level = get_children().back().unlock_level
+	GameData.unlocker = self
 
 func unlock_next_upgrade():
 	_unlock()

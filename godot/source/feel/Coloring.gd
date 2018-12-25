@@ -9,12 +9,7 @@ func _ready():
 	_ai_colored_properties = { GameData.ai: '' }
 	
 	GameData.ball.connect('hit_this_paddle', self, '_change_ball_color', [GameData.ball])
-	
-	get_tree().connect('node_added', self, '_connect_if_is_ball')
-
-func _connect_if_is_ball(node):
-	if node is Ball:
-		_connect_ball_for_color_change(node)
+	GameData.game.connect('ball_added', self, '_connect_ball_for_color_change')
 
 func _connect_ball_for_color_change(ball):
 	ball.connect('hit_this_paddle', self, '_change_ball_color', [ball])

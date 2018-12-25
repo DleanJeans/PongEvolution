@@ -20,9 +20,9 @@ collision_mask = 3
 shape = SubResource( 1 )
 
 [node name="Progress" type="TextureProgress" parent="Body"]
-margin_left = -43.0
+margin_left = -50.0
 margin_top = -50.0
-margin_right = 57.0
+margin_right = 50.0
 margin_bottom = 50.0
 min_value = -1.0
 max_value = 1.0

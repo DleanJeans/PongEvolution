@@ -94,6 +94,11 @@ _global_script_classes=[ {
 "language": "GDScript",
 "path": "res://source/debug/TimeControl.gd"
 }, {
+"base": "Node2D",
+"class": "Unlocker",
+"language": "GDScript",
+"path": "res://source/mechanics/Unlocker.gd"
+}, {
 "base": "Node",
 "class": "Upgrade",
 "language": "GDScript",
@@ -122,6 +127,7 @@ _global_script_class_icons={
 "Seek": "",
 "Simplex": "",
 "TimeControl": "",
+"Unlocker": "",
 "Upgrade": "",
 "Wall": ""
 }
@@ -210,6 +216,10 @@ left_click={
 2d_physics/layer_1="Balls"
 2d_physics/layer_2="Paddles"
 2d_physics/layer_3="Walls"
+
+[memory]
+
+limits/message_queue/max_size_kb=2048
 
 [physics]
 

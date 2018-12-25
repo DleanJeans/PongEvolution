@@ -2,18 +2,17 @@ extends Position2D
 
 signal ball_respawned
 
-var balls_queued = 0
-
 func respawn_ball(ball):
 	if ball.name != 'Ball':
 		ball.queue_free()
 		return
 	
 	if $Area.get_overlapping_bodies().size() > 0:
-		call_deferred('respawn_ball', ball)
+		yield(get_tree(), 'idle_frame')
+		respawn_ball(ball)
 		return
 	
-	ball.add_child(Scenes.PopAnimation.instance().delay(0.1))
+	ball.add_child(Scenes.PopAnimation.instance().delay(0.5))
 	var initial_velocity = ball.velocity
 	ball.velocity = Vector2()
 	ball.position = position

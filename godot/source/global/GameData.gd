@@ -14,6 +14,7 @@ var ai:Paddle
 var left_wall:Wall
 var right_wall:Wall
 
+var unlocker:Unlocker
 var scoring:Scoring
 var coloring:Coloring
 

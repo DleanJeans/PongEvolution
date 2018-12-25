@@ -10,4 +10,5 @@ var ColorPicker = load('res://source/ai/ColorPicker.tscn')
 var Scoreboard = load('res://source/world/Scoreboard.tscn')
 var LevelProgress = load('res://source/ui/LevelProgress.tscn')
 
-var PopAnimation = preload('res://source/feel/PopAnimation.tscn')
+var PopAnimation = load('res://source/feel/PopAnimation.tscn')
+var BouncingSound = load('res://source/feel/BouncingSound.tscn')

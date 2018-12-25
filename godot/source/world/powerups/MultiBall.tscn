@@ -1,13 +1,19 @@
-[gd_scene load_steps=6 format=2]
+[gd_scene load_steps=8 format=2]
 
 [ext_resource path="res://source/world/powerups/MultiBall.gd" type="Script" id=1]
 [ext_resource path="res://assets/png/Circle.png" type="Texture" id=2]
 [ext_resource path="res://source/feel/PopAnimation.tscn" type="PackedScene" id=3]
 [ext_resource path="res://source/animations/Bob.tres" type="Animation" id=4]
+[ext_resource path="res://assets/wav/PowerupExplosion.wav" type="AudioStream" id=5]
 
 [sub_resource type="CircleShape2D" id=1]
 
 radius = 37.0
+
+[sub_resource type="AudioStreamRandomPitch" id=2]
+
+audio_stream = ExtResource( 5 )
+random_pitch = 1.25
 
 [node name="MultiBall" type="Node2D"]
 scale = Vector2( 0.9, 0.9 )
@@ -40,4 +46,8 @@ autoplay = "Pop"
 anims/Bob = ExtResource( 4 )
 next/Pop = "Bob"
 
+[node name="Explosion" type="AudioStreamPlayer" parent="."]
+stream = SubResource( 2 )
+
 [connection signal="body_entered" from="Area" to="." method="_on_Area_body_entered"]
+[connection signal="finished" from="Explosion" to="Explosion" method="queue_free"]
