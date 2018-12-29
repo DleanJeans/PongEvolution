@@ -13,7 +13,7 @@ var velocity:Vector2 setget set_velocity, get_velocity
 func set_velocity(value): $Movement.velocity = value
 func get_velocity(): return $Movement.velocity
 
-func _hit_ball(ball):
+func emit_hit_ball(ball):
 	emit_signal('hit_ball')
 	emit_signal('hit_this_ball', ball)
 

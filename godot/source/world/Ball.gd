@@ -14,14 +14,14 @@ var velocity:Vector2 setget set_velocity, get_velocity
 func set_velocity(value): $Movement.velocity = value
 func get_velocity(): return $Movement.velocity
 
-func _hit_paddle(paddle):
+func emit_hit_paddle(paddle):
 	emit_signal('hit_paddle')
 	emit_signal('hit_this_paddle', paddle)
 
-func _hit_wall():
+func emit_hit_wall():
 	emit_signal('hit_wall')
 
-func _hit_ball(ball):
+func emit_hit_ball(ball):
 	emit_signal('hit_ball')
 	emit_signal('hit_this_ball', ball)
 
@@ -30,6 +30,15 @@ func reflect_x():
 
 func reflect_y():
 	self.velocity.y *= -1
+
+func set_velocity_x_sign(new_sign):
+	self.velocity.x = abs(self.velocity.x) * new_sign
+
+func set_velocity_y_sign(new_sign):
+	self.velocity.y = abs(self.velocity.y) * new_sign
+
+func bounce_off_paddle(paddle):
+	$Bouncing.bounce_off_paddle(paddle)
 
 func queue_free():
 	.queue_free()

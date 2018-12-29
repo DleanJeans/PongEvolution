@@ -10,9 +10,16 @@ func _ready():
 	
 	GameData.ball.connect('hit_this_paddle', self, '_change_ball_color', [GameData.ball])
 	GameData.game.connect('ball_added', self, '_connect_ball_for_color_change')
+	GameData.game.connect('ball_removed', self, '_remove_ball_from_dict')
 
 func _connect_ball_for_color_change(ball):
 	ball.connect('hit_this_paddle', self, '_change_ball_color', [ball])
+
+func _remove_ball_from_dict(ball):
+	if _player_colored_properties.has(ball):
+		_player_colored_properties.erase(ball)
+	elif _ai_colored_properties.has(ball):
+		_ai_colored_properties.erase(ball)
 
 func add_player_color(node, custom_property = ''):
 	_player_colored_properties[node] = custom_property

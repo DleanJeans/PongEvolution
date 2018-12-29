@@ -1,35 +1,50 @@
 extends Node2D
 
 onready var ball = get_parent()
-func _on_Area_body_entered(body):
-	if body is Paddle:
-		ball._hit_paddle(body)
-		body._hit_ball(ball)
-		_bounce_off_paddle(body)
-	elif body is StaticBody2D:
-		ball.reflect_x()
-		ball._hit_wall()
+
+func _physics_process(delta):
+	if ball.get_slide_count() == 0: return
+	
+	for i in range(ball.get_slide_count()):
+		var collision = ball.get_slide_collision(i)
+		_handle_collision(collision)
+	
 	_retain_velocity_y()
 
+func _handle_collision(collision):
+	var collider = collision.collider
+	var normal = collision.normal
+	
+	if collider is Ball:
+		_bounce_off_ball(collision)
+		ball.emit_hit_ball(ball)
+	elif collider is Wall:
+		ball.set_velocity_x_sign(sign(collision.normal.x))
+		ball.emit_hit_wall()
+
+func _bounce_off_ball(collision:KinematicCollision2D):
+	var normal = collision.normal
+	ball.velocity = ball.velocity.bounce(normal)
+
+func _retain_velocity_y():
+	ball.velocity.y = ball.normal_speed * sign(ball.velocity.y)
+
+func _on_Area_body_entered(body):
+	if body is Paddle:
+		ball.emit_hit_paddle(body)
+		body.emit_hit_ball(ball)
+		_bounce_off_paddle(body)
+
 func _bounce_off_paddle(paddle:Paddle):
-	ball.reflect_y()
+	var to_screen_center = _get_to_screen_center()
+	ball.set_velocity_y_sign(sign(to_screen_center.y))
+	
 	var ball_to_paddle_center = ball.position.x - paddle.position.x
 	var reflected_value = ball_to_paddle_center / paddle.half_width
 	reflected_value = clamp(reflected_value, -1, 1)
 	ball.velocity.x = ball.normal_speed * reflected_value
 
-func _retain_velocity_y():
-	ball.velocity.y = max(abs(ball.velocity.y), ball.normal_speed) * sign(ball.velocity.y)
-
-func _physics_process(delta):
-	if ball.get_slide_count() == 0: return
-	
-	var collision = ball.get_slide_collision(0)
-	if collision.collider is Ball:
-		ball._hit_ball(ball)
-		_bounce_off_collision(collision)
-
-func _bounce_off_collision(collision:KinematicCollision2D):
-	var normal = collision.normal
-	ball.velocity = ball.velocity.bounce(normal)
-	ball.add_child(Phasing.new())
+func _get_to_screen_center():
+	var screen_center = get_viewport_rect().size * 0.5
+	var to_screen_center = screen_center - global_position
+	return to_screen_center

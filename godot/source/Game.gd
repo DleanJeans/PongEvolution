@@ -4,6 +4,7 @@ extends Node2D
 signal player_scored
 signal ai_scored
 signal ball_added(ball)
+signal ball_removed(ball)
 
 onready var ball = $World/Ball
 
@@ -20,11 +21,16 @@ func _ready():
 	ball.velocity.y = -500
 	
 	get_tree().connect('node_added', self, '_emit_if_ball_added')
+	get_tree().connect('node_removed', self, '_emit_if_ball_removed')
 	emit_signal('ball_added', ball)
 
 func _emit_if_ball_added(node):
 	if node is Ball:
 		emit_signal('ball_added', node)
+
+func _emit_if_ball_removed(node):
+	if node is Ball:
+		emit_signal('ball_removed', node)
 
 func _on_GoalTop_detected_ball():
 	emit_signal('player_scored')

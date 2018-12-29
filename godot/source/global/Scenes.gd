@@ -5,6 +5,7 @@ var Wall = load('res://source/world/Wall.tscn')
 var Brain = load('res://source/ai/Brain.tscn')
 var Ball = load('res://source/world/Ball.tscn')
 var PowerupSpawner = load('res://source/world/powerups/PowerupSpawner.tscn')
+var MultiBall = load('res://source/world/powerups/MultiBall.tscn')
 
 var ColorPicker = load('res://source/ai/ColorPicker.tscn')
 var Scoreboard = load('res://source/world/Scoreboard.tscn')

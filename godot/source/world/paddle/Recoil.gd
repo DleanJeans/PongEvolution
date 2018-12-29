@@ -1,5 +1,6 @@
 extends Node2D
 
+export(bool) var enable = true
 export(float) var duration = 0.4
 export(float) var max_recoil = 100
 export(float) var max_recoil_speed = 100
@@ -10,6 +11,8 @@ onready var initial_y = paddle.position.y
 onready var movement = $'../Movement'
 
 func _on_Paddle_hit_this_ball(ball):
+	if not enable: return
+	
 	var ball_velocity = ball.velocity
 	paddle.velocity.y = ball_velocity.y * 0.3
 

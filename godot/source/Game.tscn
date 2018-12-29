@@ -1,4 +1,4 @@
-[gd_scene load_steps=31 format=2]
+[gd_scene load_steps=30 format=2]
 
 [ext_resource path="res://source/Game.gd" type="Script" id=1]
 [ext_resource path="res://source/debug/Debug.gd" type="Script" id=2]
@@ -13,7 +13,7 @@
 [ext_resource path="res://source/mechanics/upgrades/LevelProgress.gd" type="Script" id=11]
 [ext_resource path="res://source/mechanics/upgrades/Scoreboard.gd" type="Script" id=12]
 [ext_resource path="res://source/mechanics/upgrades/MultiBall.gd" type="Script" id=13]
-[ext_resource path="res://source/mechanics/BallRespawner.gd" type="Script" id=14]
+[ext_resource path="res://source/mechanics/BallRespawner.tscn" type="PackedScene" id=14]
 [ext_resource path="res://source/mechanics/SpeedIncrease.gd" type="Script" id=15]
 [ext_resource path="res://source/mechanics/Scoring.gd" type="Script" id=16]
 [ext_resource path="res://assets/Square.png" type="Texture" id=17]
@@ -27,21 +27,17 @@
 [ext_resource path="res://source/ui/GameOverScreen.tscn" type="PackedScene" id=25]
 [ext_resource path="res://source/ui/PauseScreen.tscn" type="PackedScene" id=26]
 
-[sub_resource type="CircleShape2D" id=1]
-
-radius = 20.0
-
-[sub_resource type="AudioStreamRandomPitch" id=2]
+[sub_resource type="AudioStreamRandomPitch" id=1]
 
 audio_stream = ExtResource( 21 )
 random_pitch = 1.25
 
-[sub_resource type="AudioStreamRandomPitch" id=3]
+[sub_resource type="AudioStreamRandomPitch" id=2]
 
 audio_stream = ExtResource( 22 )
 random_pitch = 1.25
 
-[sub_resource type="AudioStreamRandomPitch" id=4]
+[sub_resource type="AudioStreamRandomPitch" id=3]
 
 audio_stream = ExtResource( 23 )
 
@@ -60,7 +56,7 @@ script = ExtResource( 3 )
 
 [node name="Unlocker" type="Node2D" parent="Mechanics"]
 script = ExtResource( 4 )
-save_level = 7
+save_level = 3
 
 [node name="PlayerPaddle" type="Node2D" parent="Mechanics/Unlocker"]
 editor/display_folded = true
@@ -113,15 +109,7 @@ unlock_level = 6
 script = ExtResource( 13 )
 unlock_level = 7
 
-[node name="BallRespawner" type="Position2D" parent="Mechanics"]
-position = Vector2( 800, 450 )
-script = ExtResource( 14 )
-
-[node name="Area" type="Area2D" parent="Mechanics/BallRespawner"]
-collision_layer = 0
-
-[node name="Shape" type="CollisionShape2D" parent="Mechanics/BallRespawner/Area"]
-shape = SubResource( 1 )
+[node name="BallRespawner" parent="Mechanics" instance=ExtResource( 14 )]
 
 [node name="SpeedIncrease" type="Node2D" parent="Mechanics"]
 script = ExtResource( 15 )
@@ -136,6 +124,7 @@ script = ExtResource( 16 )
 modulate = Color( 0, 0, 0, 1 )
 position = Vector2( 800, 450 )
 scale = Vector2( 16, 9 )
+z_index = -1
 texture = ExtResource( 17 )
 
 [node name="Ball" parent="World" instance=ExtResource( 18 )]
@@ -153,13 +142,13 @@ position = Vector2( 800, 980 )
 script = ExtResource( 20 )
 
 [node name="GoalUp" type="AudioStreamPlayer" parent="Feel/SoundEffects"]
-stream = SubResource( 2 )
+stream = SubResource( 1 )
 
 [node name="GoalDown" type="AudioStreamPlayer" parent="Feel/SoundEffects"]
-stream = SubResource( 3 )
+stream = SubResource( 2 )
 
 [node name="Explosion" type="AudioStreamPlayer" parent="Feel/SoundEffects"]
-stream = SubResource( 4 )
+stream = SubResource( 3 )
 volume_db = 5.0
 
 [node name="Music" type="AudioStreamPlayer" parent="Feel/SoundEffects"]

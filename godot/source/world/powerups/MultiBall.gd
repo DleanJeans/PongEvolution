@@ -17,9 +17,10 @@ func _on_Area_body_entered(ball):
 	
 	ball.add_child(Phasing.new())
 	
-	var explosion = $Explosion
-	remove_child(explosion)
-	get_parent().add_child(explosion)
-	explosion.play()
+	if has_node('Explosion'):
+		var explosion = $Explosion
+		remove_child(explosion)
+		get_parent().add_child(explosion)
+		explosion.play()
 	
 	queue_free()

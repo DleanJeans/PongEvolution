@@ -5,10 +5,10 @@ var top_color setget set_top_color
 var bottom_color setget set_bottom_color
 
 func set_top_color(value):
-	$Body/Progress.tint_under = value
+	$Progress.tint_under = value
 
 func set_bottom_color(value):
-	$Body/Progress.tint_progress = value
+	$Progress.tint_progress = value
 
 func sync_with(progress):
-	progress.share($Body/Progress)
+	progress.share($Progress)

@@ -216,6 +216,8 @@ left_click={
 2d_physics/layer_1="Balls"
 2d_physics/layer_2="Paddles"
 2d_physics/layer_3="Walls"
+2d_physics/layer_4="Powerups"
+2d_physics/layer_5="Spawners"
 
 [memory]
 
