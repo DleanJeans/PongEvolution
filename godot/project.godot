@@ -99,15 +99,15 @@ _global_script_classes=[ {
 "language": "GDScript",
 "path": "res://source/debug/TimeControl.gd"
 }, {
+"base": "Node",
+"class": "Unlockable",
+"language": "GDScript",
+"path": "res://source/mechanics/unlockables/Unlockable.gd"
+}, {
 "base": "Node2D",
 "class": "Unlocker",
 "language": "GDScript",
 "path": "res://source/mechanics/Unlocker.gd"
-}, {
-"base": "Node",
-"class": "Upgrade",
-"language": "GDScript",
-"path": "res://source/mechanics/upgrades/Upgrade.gd"
 }, {
 "base": "Node2D",
 "class": "Wall",
@@ -133,8 +133,8 @@ _global_script_class_icons={
 "Simplex": "",
 "SpeedIncrease": "",
 "TimeControl": "",
+"Unlockable": "",
 "Unlocker": "",
-"Upgrade": "",
 "Wall": ""
 }
 

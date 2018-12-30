@@ -1,4 +1,4 @@
-extends "res://source/mechanics/upgrades/Upgrade.gd"
+extends Unlockable
 
 onready var unlocker = get_parent()
 

@@ -4,15 +4,15 @@
 [ext_resource path="res://source/mechanics/Scoring.gd" type="Script" id=2]
 [ext_resource path="res://source/mechanics/SpeedIncrease.gd" type="Script" id=3]
 [ext_resource path="res://source/mechanics/Unlocker.gd" type="Script" id=4]
-[ext_resource path="res://source/mechanics/upgrades/PlayerPaddle.gd" type="Script" id=5]
-[ext_resource path="res://source/mechanics/upgrades/Walls.gd" type="Script" id=6]
-[ext_resource path="res://source/mechanics/upgrades/AIPaddle.gd" type="Script" id=7]
-[ext_resource path="res://source/mechanics/upgrades/PlayerControl.gd" type="Script" id=8]
-[ext_resource path="res://source/mechanics/upgrades/AIBrain.gd" type="Script" id=9]
-[ext_resource path="res://source/mechanics/upgrades/Colors.gd" type="Script" id=10]
-[ext_resource path="res://source/mechanics/upgrades/LevelProgress.gd" type="Script" id=11]
-[ext_resource path="res://source/mechanics/upgrades/Scoreboard.gd" type="Script" id=12]
-[ext_resource path="res://source/mechanics/upgrades/MultiBall.gd" type="Script" id=13]
+[ext_resource path="res://source/mechanics/unlockables/PlayerPaddle.gd" type="Script" id=5]
+[ext_resource path="res://source/mechanics/unlockables/Walls.gd" type="Script" id=6]
+[ext_resource path="res://source/mechanics/unlockables/AIPaddle.gd" type="Script" id=7]
+[ext_resource path="res://source/mechanics/unlockables/PlayerControl.gd" type="Script" id=8]
+[ext_resource path="res://source/mechanics/unlockables/AIBrain.gd" type="Script" id=9]
+[ext_resource path="res://source/mechanics/unlockables/Colors.gd" type="Script" id=10]
+[ext_resource path="res://source/mechanics/unlockables/LevelProgress.gd" type="Script" id=11]
+[ext_resource path="res://source/mechanics/unlockables/Scoreboard.gd" type="Script" id=12]
+[ext_resource path="res://source/mechanics/unlockables/MultiBall.gd" type="Script" id=13]
 [ext_resource path="res://assets/Square.png" type="Texture" id=14]
 [ext_resource path="res://source/world/Ball.tscn" type="PackedScene" id=15]
 [ext_resource path="res://source/world/Goal.tscn" type="PackedScene" id=16]
@@ -20,6 +20,8 @@
 [ext_resource path="res://source/world/Wall.tscn" type="PackedScene" id=18]
 [ext_resource path="res://source/world/Paddle.tscn" type="PackedScene" id=19]
 [ext_resource path="res://source/feel/SoundEffects.tscn" type="PackedScene" id=20]
+
+
 
 [node name="GameRebuild" type="Node2D"]
 script = ExtResource( 1 )

@@ -1,4 +1,4 @@
-extends "res://source/mechanics/upgrades/Upgrade.gd"
+extends Unlockable
 
 func unlock():
 	var powerup_spawner = Scenes.PowerupSpawner.instance()
