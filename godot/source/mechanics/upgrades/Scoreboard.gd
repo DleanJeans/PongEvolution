@@ -19,6 +19,6 @@ func unlock():
 	
 	coloring.update_modulate()
 	
-	yield($'../../BallRespawner', 'ball_respawned')
+	yield(GameData.ball_respawner, 'ball_respawned')
 	GameData.left_wall.sync_with(scoring.board.progress)
 	GameData.right_wall.sync_with(scoring.board.progress)

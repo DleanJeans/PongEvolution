@@ -2,6 +2,10 @@ extends Position2D
 
 signal ball_respawned
 
+func _ready():
+	GameData.top_goal.connect('detected_this_ball', self, 'respawn_ball')
+	GameData.bottom_goal.connect('detected_this_ball', self, 'respawn_ball')
+
 func respawn_ball(ball):
 	if ball.name != 'Ball':
 		ball.queue_free()

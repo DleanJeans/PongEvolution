@@ -10,7 +10,10 @@ onready var paddle = get_parent()
 onready var initial_y = paddle.position.y
 onready var movement = $'../Movement'
 
-func _on_Paddle_hit_this_ball(ball):
+func _ready():
+	paddle.connect('hit_this_ball', self, '_recoil')
+
+func _recoil(ball):
 	if not enable: return
 	
 	var ball_velocity = ball.velocity

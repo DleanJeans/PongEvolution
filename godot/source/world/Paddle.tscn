@@ -1,11 +1,10 @@
-[gd_scene load_steps=8 format=2]
+[gd_scene load_steps=7 format=2]
 
 [ext_resource path="res://source/world/Paddle.gd" type="Script" id=1]
 [ext_resource path="res://assets/Square.png" type="Texture" id=2]
-[ext_resource path="res://source/feel/PopAnimation.tscn" type="PackedScene" id=3]
-[ext_resource path="res://source/world/paddle/HorizontalControl.gd" type="Script" id=4]
-[ext_resource path="res://source/world/Movement.gd" type="Script" id=5]
-[ext_resource path="res://source/world/paddle/Recoil.gd" type="Script" id=6]
+[ext_resource path="res://source/world/paddle/HorizontalControl.gd" type="Script" id=3]
+[ext_resource path="res://source/world/Movement.gd" type="Script" id=4]
+[ext_resource path="res://source/world/paddle/Recoil.gd" type="Script" id=5]
 
 [sub_resource type="RectangleShape2D" id=1]
 
@@ -19,22 +18,20 @@ script = ExtResource( 1 )
 
 [node name="Shape" type="CollisionShape2D" parent="."]
 shape = SubResource( 1 )
+disabled = true
 
 [node name="Sprite" type="Sprite" parent="."]
 scale = Vector2( 1.4, 0.3 )
 texture = ExtResource( 2 )
 
-[node name="PopAnimation" parent="." instance=ExtResource( 3 )]
-
 [node name="HorizontalControl" type="Node2D" parent="."]
-script = ExtResource( 4 )
+script = ExtResource( 3 )
 max_speed = 700.0
 acceleration = 7000.0
 
 [node name="Movement" type="Node2D" parent="."]
-script = ExtResource( 5 )
+script = ExtResource( 4 )
 
 [node name="Recoil" type="Node2D" parent="."]
-script = ExtResource( 6 )
+script = ExtResource( 5 )
 
-[connection signal="hit_this_ball" from="." to="Recoil" method="_on_Paddle_hit_this_ball"]

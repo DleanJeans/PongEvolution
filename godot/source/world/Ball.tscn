@@ -11,7 +11,7 @@ radius = 15.0
 
 [sub_resource type="CircleShape2D" id=2]
 
-radius = 16.0
+radius = 17.5
 
 [node name="Ball" type="KinematicBody2D" groups=[
 "Balls",

@@ -11,6 +11,11 @@ var player:Paddle
 var ball:Ball
 var ai:Paddle
 
+var top_goal
+var bottom_goal
+
+var ball_respawner
+
 var left_wall:Wall
 var right_wall:Wall
 

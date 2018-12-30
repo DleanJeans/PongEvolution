@@ -6,6 +6,11 @@ signal hit_this_ball(ball)
 
 export(float) var speed_multiplier = 1
 
+var collision_enabled = false setget set_collision_enabled
+func set_collision_enabled(value):
+	collision_enabled = value
+	$Shape.disabled = not value
+
 var half_width:float setget, get_width
 func get_width(): return $Shape.shape.extents.x
 
