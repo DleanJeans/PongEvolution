@@ -1,4 +1,4 @@
-[gd_scene load_steps=25 format=2]
+[gd_scene load_steps=24 format=2]
 
 [ext_resource path="res://source/Game.gd" type="Script" id=1]
 [ext_resource path="res://source/debug/Debug.gd" type="Script" id=2]
@@ -22,8 +22,7 @@
 [ext_resource path="res://source/world/Wall.tscn" type="PackedScene" id=20]
 [ext_resource path="res://source/world/Paddle.tscn" type="PackedScene" id=21]
 [ext_resource path="res://source/feel/SoundEffects.tscn" type="PackedScene" id=22]
-[ext_resource path="res://source/ui/GameOverScreen.tscn" type="PackedScene" id=23]
-[ext_resource path="res://source/ui/PauseScreen.tscn" type="PackedScene" id=24]
+[ext_resource path="res://source/ui/PauseScreen.tscn" type="PackedScene" id=23]
 
 [node name="Game" type="Node2D"]
 script = ExtResource( 1 )
@@ -125,9 +124,6 @@ speed_multiplier = 0.8
 
 [node name="UI" type="CanvasLayer" parent="."]
 
-[node name="GameOverScreen" parent="UI" instance=ExtResource( 23 )]
-visible = false
-
-[node name="PauseScreen" parent="UI" instance=ExtResource( 24 )]
+[node name="PauseScreen" parent="UI" instance=ExtResource( 23 )]
 visible = false
 

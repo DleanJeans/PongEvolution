@@ -2,7 +2,8 @@
 
 [ext_resource path="res://source/ui/ColorPicker.gd" type="Script" id=1]
 [ext_resource path="res://assets/Square.png" type="Texture" id=2]
-[ext_resource path="res://assets/fonts/Pixel.tres" type="DynamicFont" id=3]
+[ext_resource path="res://assets/fonts/PressStart.tres" type="DynamicFont" id=3]
+
 
 [sub_resource type="StyleBoxEmpty" id=1]
 
