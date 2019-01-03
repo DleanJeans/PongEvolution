@@ -14,9 +14,13 @@ var velocity:Vector2 setget set_velocity, get_velocity
 func set_velocity(value): $Movement.velocity = value
 func get_velocity(): return $Movement.velocity
 
+var last_hit_paddle
+
 func emit_hit_paddle(paddle):
 	emit_signal('hit_paddle')
 	emit_signal('hit_this_paddle', paddle)
+	
+	last_hit_paddle = paddle
 
 func emit_hit_wall():
 	emit_signal('hit_wall')

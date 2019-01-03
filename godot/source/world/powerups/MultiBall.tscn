@@ -1,54 +1,24 @@
-[gd_scene load_steps=8 format=2]
+[gd_scene load_steps=6 format=2]
 
-[ext_resource path="res://source/world/powerups/MultiBall.gd" type="Script" id=1]
-[ext_resource path="res://assets/png/Circle.png" type="Texture" id=2]
-[ext_resource path="res://source/feel/PopAnimation.tscn" type="PackedScene" id=3]
-[ext_resource path="res://source/animations/Bob.tres" type="Animation" id=4]
-[ext_resource path="res://assets/wav/PowerupExplosion.wav" type="AudioStream" id=5]
-
-[sub_resource type="CircleShape2D" id=1]
-
-radius = 35.0
+[ext_resource path="res://source/world/powerups/Powerup.tscn" type="PackedScene" id=1]
+[ext_resource path="res://source/world/powerups/MultiBall.gd" type="Script" id=2]
+[ext_resource path="res://assets/png/powerups/MultiBall.png" type="Texture" id=3]
+[ext_resource path="res://assets/wav/PowerupExplosion.wav" type="AudioStream" id=4]
 
 [sub_resource type="AudioStreamRandomPitch" id=2]
 
-audio_stream = ExtResource( 5 )
+audio_stream = ExtResource( 4 )
 random_pitch = 1.25
 
-[node name="MultiBall" type="Node2D"]
-script = ExtResource( 1 )
+[node name="MultiBall" index="0" instance=ExtResource( 1 )]
+scale = Vector2( 1, 1 )
+script = ExtResource( 2 )
 
-[node name="Area" type="Area2D" parent="."]
-visible = false
-collision_layer = 8
+[node name="Sprite" parent="." index="0"]
+modulate = Color( 0.0117647, 0.662745, 0.956863, 1 )
+texture = ExtResource( 3 )
 
-[node name="Shape" type="CollisionShape2D" parent="Area"]
-shape = SubResource( 1 )
-
-[node name="Sprite" type="Sprite" parent="."]
-modulate = Color( 0, 0.788235, 1, 1 )
-self_modulate = Color( 1, 1, 1, 0.25 )
-scale = Vector2( 0.75, 0.75 )
-texture = ExtResource( 2 )
-
-[node name="Ball" type="Sprite" parent="Sprite"]
-position = Vector2( -15, -15 )
-scale = Vector2( 0.25, 0.25 )
-texture = ExtResource( 2 )
-
-[node name="Ball2" type="Sprite" parent="Sprite"]
-position = Vector2( 15, 15 )
-scale = Vector2( 0.25, 0.25 )
-texture = ExtResource( 2 )
-
-[node name="PopAnimation" parent="." instance=ExtResource( 3 )]
-autoplay = "Pop"
-anims/Bob = ExtResource( 4 )
-next/Pop = "Bob"
-
-[node name="Explosion" type="AudioStreamPlayer" parent="."]
+[node name="Explosion" type="AudioStreamPlayer" parent="." index="3"]
 stream = SubResource( 2 )
 
-[connection signal="body_entered" from="Area" to="." method="_on_Area_body_entered"]
-[connection signal="animation_finished" from="PopAnimation" to="." method="_on_PopAnimation_animation_finished"]
 [connection signal="finished" from="Explosion" to="Explosion" method="queue_free"]

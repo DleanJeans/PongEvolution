@@ -15,6 +15,7 @@ var top_goal
 var bottom_goal
 
 var ball_respawner
+var powerup_spawner
 
 var left_wall:Wall
 var right_wall:Wall

@@ -5,15 +5,17 @@ extends Node2D
 signal new_level(level)
 
 export(int) var save_level = 0
-export(bool) var update_unlock_level setget set_update_unlock_level
+export(bool) var update_unlock_levels setget set_update_unlock_levels
 
 var max_level = 0
 var level = 0
 var unlocks = 0
 
-func set_update_unlock_level(value):
-	if not Engine.editor_hint: return
-	
+func set_update_unlock_levels(value):
+	if Engine.editor_hint:
+		_update_unlock_levels()
+
+func _update_unlock_levels():
 	var last_child
 	var num = 0
 	for child in get_children():

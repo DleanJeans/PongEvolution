@@ -1,5 +1,5 @@
 class_name Unlockable
-extends Node
+extends Node2D
 
 export(int) var unlock_level = -1
 

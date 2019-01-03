@@ -6,6 +6,13 @@ signal hit_this_ball(ball)
 
 export(float) var speed_multiplier = 1
 
+onready var sprite_initial_scale = 1.4
+var width_multiplier:float = 1.0 setget set_width_multiplier
+func set_width_multiplier(value):
+	width_multiplier = value
+	$Shape.scale.x = value
+	$Sprite.scale.x = sprite_initial_scale * value
+
 var collision_enabled = false setget set_collision_enabled
 func set_collision_enabled(value):
 	collision_enabled = value

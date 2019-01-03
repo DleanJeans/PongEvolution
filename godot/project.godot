@@ -35,6 +35,11 @@ _global_script_classes=[ {
 "path": "res://source/global/Direction.gd"
 }, {
 "base": "Node2D",
+"class": "DoubleLength",
+"language": "GDScript",
+"path": "res://source/world/powerups/DoubleLength.gd"
+}, {
+"base": "Node2D",
 "class": "Game",
 "language": "GDScript",
 "path": "res://source/Game.gd"
@@ -63,6 +68,11 @@ _global_script_classes=[ {
 "class": "PlayerControl",
 "language": "GDScript",
 "path": "res://source/mechanics/PlayerControl.gd"
+}, {
+"base": "Node2D",
+"class": "Powerup",
+"language": "GDScript",
+"path": "res://source/world/powerups/Powerup.gd"
 }, {
 "base": "Node2D",
 "class": "Scoreboard",
@@ -99,7 +109,7 @@ _global_script_classes=[ {
 "language": "GDScript",
 "path": "res://source/debug/TimeControl.gd"
 }, {
-"base": "Node",
+"base": "Node2D",
 "class": "Unlockable",
 "language": "GDScript",
 "path": "res://source/mechanics/unlockables/Unlockable.gd"
@@ -120,12 +130,14 @@ _global_script_class_icons={
 "Coloring": "",
 "Const": "",
 "Direction": "",
+"DoubleLength": "",
 "Game": "",
 "ModulateTween": "",
 "Movement": "",
 "Paddle": "",
 "Phasing": "",
 "PlayerControl": "",
+"Powerup": "",
 "Scoreboard": "",
 "Scoring": "",
 "ScreenQuake": "",
@@ -140,7 +152,7 @@ _global_script_class_icons={
 
 [application]
 
-config/name="PongEvolution"
+config/name="In the beginning there was a ball"
 run/main_scene="res://source/Game.tscn"
 config/icon="res://icon.png"
 

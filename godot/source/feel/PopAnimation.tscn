@@ -7,8 +7,6 @@
 
 resource_name = "Pop"
 length = 0.4
-loop = false
-step = 0.1
 tracks/0/type = "value"
 tracks/0/path = NodePath(".:scale")
 tracks/0/interp = 2
@@ -35,30 +33,29 @@ tracks/1/keys = {
 } ],
 "times": PoolRealArray( 0.1 )
 }
+tracks/2/type = "method"
+tracks/2/path = NodePath("PopAnimation")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/keys = {
+"times": PoolRealArray( 0.4 ),
+"transitions": PoolRealArray( 1 ),
+"values": [ {
+"args": [  ],
+"method": "queue_free"
+} ]
+}
 
 [node name="PopAnimation" type="AnimationPlayer"]
-root_node = NodePath("..")
-autoplay = ""
-playback_process_mode = 1
-playback_default_blend_time = 0.0
-playback_speed = 1.0
 anims/Pop = SubResource( 1 )
-blend_times = [  ]
 script = ExtResource( 2 )
 
 [node name="AudioPlayer" type="AudioStreamPlayer" parent="."]
 stream = ExtResource( 1 )
-volume_db = 0.0
-pitch_scale = 1.0
-autoplay = false
-stream_paused = false
-mix_target = 0
-bus = "Master"
 
 [node name="Timer" type="Timer" parent="."]
-process_mode = 1
-wait_time = 1.0
 one_shot = true
-autostart = false
 
 [connection signal="timeout" from="Timer" to="." method="_on_Timer_timeout"]

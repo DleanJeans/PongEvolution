@@ -1,8 +1,8 @@
-extends Node2D
+extends Powerup
 
 var split_angle = 20
 
-func _on_Area_body_entered(ball):
+func activate(ball):
 	yield(get_tree(), 'idle_frame')
 	var new_ball = Scenes.Ball.instance()
 	new_ball.position = ball.position
@@ -14,6 +14,7 @@ func _on_Area_body_entered(ball):
 	ball.velocity = velocity1
 	new_ball.velocity = velocity2
 	new_ball.modulate = ball.modulate
+	new_ball.speed_multiplier = ball.speed_multiplier
 	
 	ball.add_child(Phasing.new())
 	

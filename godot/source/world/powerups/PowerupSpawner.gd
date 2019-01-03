@@ -1,31 +1,49 @@
 extends Node2D
 
-func _ready():
-	spawn_multiball()
+var _pool = []
+var _queue = []
 
-func spawn_multiball():
+func add_to_pool(powerup):
+	_pool.append(powerup)
+	spawn_powerup(_pool.size() - 1)
+
+func _spawn_queued():
+	if _queue.size() > 0:
+		spawn_powerup(_queue.front())
+		_queue.remove(0)
+
+func spawn_powerup(force_index = -1):
+	if $CooldownTimer.time_left > 0:
+		_queue.append(force_index)
+		return
+	else:
+		$CooldownTimer.start()
+	
 	var powerup_position
 	while true:
 		yield(get_tree(), 'idle_frame')
-		powerup_position = get_random_position()
+		powerup_position = _get_random_position()
 		$OverlapArea.position = powerup_position
 		
 		yield(get_tree().create_timer(0.05), 'timeout')
 		
-		if not overlaps_with_others():
+		if not _overlaps_with_others():
 			break
 	
-	var multiball = Scenes.MultiBall.instance()
-	GameData.world.call_deferred('add_child', multiball, true)
-	multiball.position = $OverlapArea.global_position
-
-func overlaps_with_others():
+	var powerup = _get_random_powerup_if_not_forced(force_index)
+	GameData.world.call_deferred('add_child', powerup, true)
+	powerup.position = $OverlapArea.global_position
+	
+func _overlaps_with_others():
 	return not $OverlapArea.get_overlapping_areas().empty() or \
 	not $OverlapArea.get_overlapping_bodies().empty()
 
-func get_random_position():
+const BALL_SPAWNER_RADIUS = 75
+const POWERUP_RADIUS = 35
+
+func _get_random_position():
 	var radius = $SpawnArea/Shape.shape.radius
-	var hollow_radius = 75 + 35 * 0.75
+	var hollow_radius = BALL_SPAWNER_RADIUS + POWERUP_RADIUS * 0.75
 	
 	var angle:float = randf() * PI * 2
 	var random = range_lerp(randf(), 0, 1, hollow_radius / radius, 1)
@@ -37,5 +55,10 @@ func get_random_position():
 	
 	return pos
 
-func _on_Timer_timeout():
-	spawn_multiball()
+func _get_random_powerup_if_not_forced(force_index):
+	var index
+	if force_index > -1:
+		index = force_index
+	else:
+		index = randi() % _pool.size()
+	return _pool[index].instance()
