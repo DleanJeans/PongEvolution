@@ -33,20 +33,6 @@ tracks/1/keys = {
 } ],
 "times": PoolRealArray( 0.1 )
 }
-tracks/2/type = "method"
-tracks/2/path = NodePath("PopAnimation")
-tracks/2/interp = 1
-tracks/2/loop_wrap = true
-tracks/2/imported = false
-tracks/2/enabled = true
-tracks/2/keys = {
-"times": PoolRealArray( 0.4 ),
-"transitions": PoolRealArray( 1 ),
-"values": [ {
-"args": [  ],
-"method": "queue_free"
-} ]
-}
 
 [node name="PopAnimation" type="AnimationPlayer"]
 anims/Pop = SubResource( 1 )
@@ -58,4 +44,5 @@ stream = ExtResource( 1 )
 [node name="Timer" type="Timer" parent="."]
 one_shot = true
 
+[connection signal="animation_finished" from="." to="." method="_on_animation_finished"]
 [connection signal="timeout" from="Timer" to="." method="_on_Timer_timeout"]

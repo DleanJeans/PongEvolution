@@ -28,5 +28,9 @@ shape = SubResource( 1 )
 autoplay = "Pop"
 anims/Bob = ExtResource( 4 )
 next/Pop = "Bob"
+free_on_finished = false
+
+[node name="LifeTimer" type="Timer" parent="."]
 
 [connection signal="body_entered" from="Area" to="." method="activate"]
+[connection signal="timeout" from="LifeTimer" to="." method="_pop_out"]

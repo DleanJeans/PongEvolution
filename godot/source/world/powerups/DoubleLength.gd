@@ -1,5 +1,5 @@
 class_name DoubleLength
-extends Node2D
+extends Powerup
 
 signal touched_paddle
 
@@ -16,6 +16,8 @@ func activate(ball:Ball):
 		return
 	else:
 		$WidthTween.set_paddle(paddle)
+	
+	$LifeTimer.stop()
 	
 	_fly_to_paddle()
 	
