@@ -1,9 +1,8 @@
 extends Node2D
 
-onready var unlocker = $'../Unlocker'
-
 func _ready():
-	unlocker.connect('new_level', self, '_extend_every_5_levels')
+	yield(get_tree(), 'idle_frame')
+	GameData.unlocker.connect('new_level', self, '_extend_every_5_levels')
 
 func _extend_every_5_levels(new_level):
 	if new_level % 5 == 1:

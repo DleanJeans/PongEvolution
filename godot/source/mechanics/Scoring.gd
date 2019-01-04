@@ -7,7 +7,7 @@ signal score_decreased
 signal score_reset
 signal score_cap_changed(new_score_cap)
 
-export(int) var score_cap = 1 setget set_score_cap
+export(int) var score_cap = 0 setget set_score_cap
 
 var board
 var goal = 0
