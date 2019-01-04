@@ -30,7 +30,7 @@ func _update_unlock_levels():
 func _ready():
 	max_level = get_children().back().unlock_level
 	GameData.unlocker = self
-	GameData.scoring.connect('goal_maxed', self, 'unlock_next_upgrade')
+	GameData.scoring.connect('score_capped', self, 'unlock_next_upgrade')
 
 func unlock_next_upgrade():
 	_unlock()

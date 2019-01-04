@@ -3,7 +3,7 @@ extends Unlockable
 func unlock():
 	var scoring = GameData.scoring
 	
-	scoring.connect('max_goals_changed', scoring.board, 'update_max_goals')
+	scoring.connect('score_cap_changed', scoring.board, 'update_score_cap')
 	
 	var coloring = GameData.coloring
 	

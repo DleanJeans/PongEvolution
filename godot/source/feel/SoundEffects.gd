@@ -6,7 +6,7 @@ func _ready():
 	GameData.game.connect('ball_added', self, '_connect_sounds')
 	GameData.game.connect('player_scored', $GoalUp, 'play')
 	GameData.game.connect('ai_scored', $GoalDown, 'play')
-	GameData.scoring.connect('goal_reset', self, '_play_explosion_if_multiball')
+	GameData.scoring.connect('score_reset', self, '_play_explosion_if_multiball')
 
 func _play_explosion_if_multiball():
 	if GameData.world.has_node('PowerupSpawner'):

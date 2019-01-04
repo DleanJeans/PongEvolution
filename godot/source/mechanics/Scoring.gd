@@ -1,54 +1,52 @@
 class_name Scoring
 extends Node2D
 
-signal goal_maxed
-signal goal_increased
-signal goal_decreased
-signal goal_reset
-signal max_goals_changed(new_max_goals)
+signal score_capped
+signal score_increased
+signal score_decreased
+signal score_reset
+signal score_cap_changed(new_score_cap)
 
-export(int) var max_goals = 1 setget set_max_goals
+export(int) var score_cap = 1 setget set_score_cap
 
 var board
 var goal = 0
 
-func increase_max_goals():
-	max_goals += 1
-	emit_signal('max_goals_changed', max_goals)
+func increase_score_cap():
+	score_cap += 1
+	emit_signal('score_cap_changed', score_cap)
 
-func set_max_goals(value):
-	if max_goals != value:
-		max_goals = value
-		emit_signal('max_goals_changed', max_goals)
+func set_score_cap(value):
+	if score_cap != value:
+		score_cap = value
+		emit_signal('score_cap_changed', score_cap)
 
 func _ready():
 	GameData.scoring = self
 	
-	GameData.game.connect('player_scored', self, 'increase_goal')
-	GameData.game.connect('ai_scored', self, 'decrease_goal')
+	GameData.game.connect('player_scored', self, '_increase_score')
+	GameData.game.connect('ai_scored', self, '_decrease_score')
 	
-	board = Scenes.Scoreboard.instance()
-	connect('goal_increased', board, 'increase')
-	connect('goal_decreased', board, 'decrease')
-	connect('goal_reset', board, 'reset')
-	GameData.world.add_child(board)
-	GameData.world.move_child(board, 1)
+	board = GameData.world.get_node('Scoreboard')
+	connect('score_increased', board, 'increase')
+	connect('score_decreased', board, 'decrease')
+	connect('score_reset', board, 'reset')
 
-func increase_goal():
+func _increase_score():
 	goal += 1
-	emit_signal('goal_increased')
+	emit_signal('score_increased')
 	
-	if goal >= max_goals:
-		emit_signal('goal_maxed')
+	if goal >= score_cap:
+		emit_signal('score_capped')
 		_reset()
 
-func decrease_goal():
+func _decrease_score():
 	self.goal -= 1
-	emit_signal('goal_decreased')
+	emit_signal('score_decreased')
 	
-	if goal <= -max_goals:
+	if goal <= -score_cap:
 		_reset()
 
 func _reset():
 	goal = 0
-	emit_signal('goal_reset')
+	emit_signal('score_reset')
