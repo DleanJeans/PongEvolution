@@ -8,6 +8,7 @@ var Ball = load('res://source/world/Ball.tscn')
 var PowerupSpawner = load('res://source/world/powerups/PowerupSpawner.tscn')
 var MultiBall = load('res://source/world/powerups/MultiBall.tscn')
 var DoubleLength = load('res://source/world/powerups/DoubleLength.tscn')
+var DoubleLengthEffect = load('res://source/world/powerups/DoubleLengthEffect.tscn')
 
 var ColorPicker = load('res://source/ai/ColorPicker.tscn')
 var Scoreboard = load('res://source/world/Scoreboard.tscn')
