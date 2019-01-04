@@ -5,8 +5,6 @@ func unlock():
 	
 	scoring.connect('max_goals_changed', scoring.board, 'update_max_goals')
 	
-	scoring.max_goals = 2
-	
 	var coloring = GameData.coloring
 	
 	coloring.add_player_color(GameData.scoring.board, 'player_color')

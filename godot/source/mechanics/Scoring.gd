@@ -12,6 +12,10 @@ export(int) var max_goals = 1 setget set_max_goals
 var board
 var goal = 0
 
+func increase_max_goals():
+	max_goals += 1
+	emit_signal('max_goals_changed', max_goals)
+
 func set_max_goals(value):
 	if max_goals != value:
 		max_goals = value
