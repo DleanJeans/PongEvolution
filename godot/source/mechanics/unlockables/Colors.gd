@@ -9,3 +9,6 @@ func unlock():
 	GameData.ui.add_child(color_picker)
 	
 	color_picker.connect('picked', coloring, 'set_player_color')
+	
+	yield(get_tree(), 'idle_frame')
+	color_picker._user_picked_color(ColorDict.GREEN)
