@@ -1,5 +1,7 @@
 extends Node2D
 
+export(float) var error_margin = 0.1
+
 onready var ball = get_parent()
 
 func _physics_process(delta):
@@ -41,7 +43,9 @@ func _bounce_off_paddle(paddle:Paddle):
 	
 	var ball_to_paddle_center = ball.position.x - paddle.position.x
 	var reflected_value = ball_to_paddle_center / paddle.half_width
-	reflected_value = clamp(reflected_value, -1, 1)
+	var error = rand_range(-error_margin, error_margin)
+	reflected_value = clamp(reflected_value, -1, 1) + error
+	
 	ball.velocity.x = ball.normal_speed * reflected_value
 
 func _get_to_screen_center():
