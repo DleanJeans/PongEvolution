@@ -7,10 +7,11 @@ signal score_decreased
 signal score_reset
 signal score_cap_changed(new_score_cap)
 
+signal score_updated(new_score)
+
 export(int) var score_cap = 0 setget set_score_cap
 
-var board
-var goal = 0
+var _score = 0
 
 func increase_score_cap():
 	score_cap += 1
@@ -26,27 +27,25 @@ func _ready():
 	
 	GameData.game.connect('player_scored', self, '_increase_score')
 	GameData.game.connect('ai_scored', self, '_decrease_score')
-	
-	board = GameData.world.get_node('Scoreboard')
-	connect('score_increased', board, 'increase')
-	connect('score_decreased', board, 'decrease')
-	connect('score_reset', board, 'reset')
 
 func _increase_score():
-	goal += 1
+	_score += 1
 	emit_signal('score_increased')
+	emit_signal('score_updated', _score)
 	
-	if goal >= score_cap:
+	if _score >= score_cap:
 		emit_signal('score_capped')
 		_reset()
 
 func _decrease_score():
-	self.goal -= 1
+	self._score -= 1
 	emit_signal('score_decreased')
+	emit_signal('score_updated', _score)
 	
-	if goal <= -score_cap:
+	if _score <= -score_cap:
 		_reset()
 
 func _reset():
-	goal = 0
+	_score = 0
 	emit_signal('score_reset')
+	emit_signal('score_updated', _score)

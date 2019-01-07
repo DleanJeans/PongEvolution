@@ -1,14 +1,11 @@
 extends Unlockable
 
 func unlock():
-	var scoring = GameData.scoring
-	
-	scoring.connect('score_cap_changed', scoring.board, 'update_score_cap')
-	
+	var scoreboard = GameData.scoreboard
 	var coloring = GameData.coloring
 	
-	coloring.add_player_color(GameData.scoring.board, 'player_color')
-	coloring.add_ai_color(GameData.scoring.board, 'ai_color')
+	coloring.add_player_color(scoreboard, 'player_color')
+	coloring.add_ai_color(scoreboard, 'ai_color')
 	
 	coloring.add_player_color(GameData.left_wall, 'bottom_color')
 	coloring.add_player_color(GameData.right_wall, 'bottom_color')
@@ -17,6 +14,5 @@ func unlock():
 	
 	coloring.update_modulate()
 	
-	yield(GameData.ball_respawner, 'ball_respawned')
-	GameData.left_wall.sync_with(scoring.board.progress)
-	GameData.right_wall.sync_with(scoring.board.progress)
+	GameData.left_wall.sync_with(scoreboard.progress)
+	GameData.right_wall.sync_with(scoreboard.progress)

@@ -57,6 +57,7 @@ script = ExtResource( 7 )
 
 [node name="Unlocker" type="Node2D" parent="Mechanics"]
 script = ExtResource( 8 )
+save_level = 7
 
 [node name="PlayerPaddle" type="Node2D" parent="Mechanics/Unlocker"]
 script = ExtResource( 9 )

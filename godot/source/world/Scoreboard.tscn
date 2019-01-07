@@ -26,3 +26,4 @@ nine_patch_stretch = true
 
 [node name="Tween" type="Tween" parent="."]
 
+[connection signal="tween_completed" from="Tween" to="." method="_on_tween_completed"]

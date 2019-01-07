@@ -21,6 +21,7 @@ func _init():
 	GameData.ball = $World/Ball
 	GameData.player = $World/PlayerPaddle
 	GameData.ai = $World/AIPaddle
+	GameData.scoreboard = $World/Scoreboard
 
 func _ready():
 	GameData.ball.velocity.y = -500

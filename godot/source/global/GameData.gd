@@ -24,6 +24,8 @@ var unlocker:Unlocker
 var scoring:Scoring
 var coloring:Coloring
 
+var scoreboard:Scoreboard
+
 var data = {}
 
 func set_data(name, value):
