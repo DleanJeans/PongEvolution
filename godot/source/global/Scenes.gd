@@ -16,3 +16,5 @@ var LevelProgress = load('res://source/ui/LevelProgress.tscn')
 
 var PopAnimation = load('res://source/feel/PopAnimation.tscn')
 var BouncingSound = load('res://source/feel/BouncingSound.tscn')
+
+var BallPhasing = load('res://source/mechanics/BallPhasing.tscn')

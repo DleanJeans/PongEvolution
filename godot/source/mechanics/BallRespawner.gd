@@ -7,7 +7,7 @@ func _ready():
 	GameData.bottom_goal.connect('detected_this_ball', self, 'respawn_ball')
 
 func respawn_ball(ball):
-	if ball.name != 'Ball':
+	if ball.name != Const.THE_BALL:
 		ball.queue_free()
 		return
 	
@@ -20,7 +20,7 @@ func respawn_ball(ball):
 	var initial_velocity = ball.velocity
 	ball.velocity = Vector2()
 	ball.position = position
-	ball.add_child(Phasing.new())
+	ball.phasing.enable_for(1)
 	
 	emit_signal('ball_respawned')
 	yield(get_tree().create_timer(1), 'timeout')
@@ -33,4 +33,3 @@ func respawn_ball(ball):
 	
 	var to_paddle = paddle.position - ball.position
 	ball.velocity = to_paddle.normalized() * ball.normal_speed
-	

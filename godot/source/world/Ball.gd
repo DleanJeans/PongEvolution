@@ -7,6 +7,8 @@ signal hit_wall
 signal hit_ball
 signal hit_this_ball
 
+onready var phasing = $BallPhasing
+
 export(float) var normal_speed = 500
 var speed_multiplier = 1
 
@@ -46,3 +48,7 @@ func bounce_off_paddle(paddle):
 
 func queue_free():
 	.queue_free()
+
+func _process(delta):
+	if position.x < 0 or position.x > 1600:
+		pass

@@ -32,12 +32,12 @@
 script = ExtResource( 1 )
 
 [node name="Debug" type="Node2D" parent="."]
-editor/display_folded = true
 script = ExtResource( 2 )
 
 [node name="TimeControl" type="Node2D" parent="Debug"]
 pause_mode = 2
 script = ExtResource( 3 )
+slomo_time_scale = 0.1
 
 [node name="Mechanics" type="Node2D" parent="."]
 
@@ -110,7 +110,7 @@ texture = ExtResource( 19 )
 
 [node name="Scoreboard" parent="World" instance=ExtResource( 20 )]
 
-[node name="Ball" parent="World" instance=ExtResource( 21 )]
+[node name="TheBall" parent="World" instance=ExtResource( 21 )]
 position = Vector2( 800, 450 )
 
 [node name="GoalTop" parent="World" instance=ExtResource( 22 )]
@@ -131,6 +131,7 @@ scale = Vector2( 1e-005, 1e-005 )
 
 [node name="PlayerPaddle" parent="World" instance=ExtResource( 25 )]
 position = Vector2( 800, 800 )
+speed_multiplier = 1.2
 
 [node name="AIPaddle" parent="World" instance=ExtResource( 25 )]
 position = Vector2( 800, 100 )

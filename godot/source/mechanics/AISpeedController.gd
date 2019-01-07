@@ -28,4 +28,4 @@ func _decrease():
 	_clamp()
 
 func _clamp():
-	ai.speed_multiplier = clamp(ai.speed_multiplier, min_multiplier, max_multiplier)
+	ai.speed_multiplier = clamp(ai.speed_multiplier, min_multiplier, max_multiplier) * 1.2

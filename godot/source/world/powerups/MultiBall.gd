@@ -1,6 +1,6 @@
 extends Powerup
 
-var split_angle = 20
+export(float) var split_angle = 30
 
 func activate(ball):
 	yield(get_tree(), 'idle_frame')
@@ -16,8 +16,9 @@ func activate(ball):
 	new_ball.modulate = ball.modulate
 	new_ball.speed_multiplier = ball.speed_multiplier
 	
-	ball.add_child(Phasing.new())
-	
+	ball.phasing.enable().disable_once_area_exited()
+	new_ball.phasing.enable().disable_once_area_exited()
+
 	if has_node('Explosion'):
 		var explosion = $Explosion
 		remove_child(explosion)

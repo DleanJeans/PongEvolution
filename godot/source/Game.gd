@@ -18,7 +18,7 @@ func _init():
 	GameData.left_wall = $World/LeftWall
 	GameData.right_wall = $World/RightWall
 	GameData.ball_respawner = $World/BallRespawner
-	GameData.ball = $World/Ball
+	GameData.ball = $World/TheBall
 	GameData.player = $World/PlayerPaddle
 	GameData.ai = $World/AIPaddle
 	GameData.scoreboard = $World/Scoreboard
